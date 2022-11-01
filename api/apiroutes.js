@@ -34,7 +34,7 @@ apirouter.post('/notes', (req, res) => {
         const newNote = {
             title,
             text,
-            note_id: uuid(),
+            note_id: Math.floor((1 + Math.random())  *10000),
         };
         db.push(newNote);
 
