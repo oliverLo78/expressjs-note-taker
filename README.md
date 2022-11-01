@@ -73,8 +73,8 @@ Distributed under the MIT License. See [LICENSE](./LICENSE) for more information
 ## Contact
 
 For any further questions feel free to contact me via:
-- GitHub: [Mateo-Wallace](https://github.com/Mateo-Wallace)
-- Email: [mateo.t.wallace@gmail.com](mailto:mateo.t.wallace@gmail.com)
+- GitHub: [Oliver-Lopez](https://github.com/)
+- Email: [oliver.t.@gmail.com](mailto:mateo.t.wallace@gmail.com)
 - LinkedIn: [Mateo Wallace](https://www.linkedin.com/in/mateo-wallace-57931b254/)
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
