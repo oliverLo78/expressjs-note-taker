@@ -35,7 +35,7 @@ This application is a note taker powered by expressjs back end and will save and
 ## Installation
 Installation comment: 
 
-1. code block
+code block
 ```
 npm install
 ```
@@ -46,9 +46,31 @@ npm i express
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Usage
-1. List
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+User Story
+```
+AS A small business owner
+I WANT to be able to write and save notes
+SO THAT I can organize my thoughts and keep track of tasks I need to complete
+```
+Acceptance Criteria
+```
+GIVEN a note-taking application
+WHEN I open the Note Taker
+THEN I am presented with a landing page with a link to a notes page
+WHEN I click on the link to the notes page
+THEN I am presented with a page with existing notes listed in the left-hand column, plus empty fields to enter a new note title and the note’s text in the right-hand column
+WHEN I enter a new note title and the note’s text
+THEN a Save icon appears in the navigation at the top of the page
+WHEN I click on the Save icon
+THEN the new note I have entered is saved and appears in the left-hand column with the other existing notes
+WHEN I click on an existing note in the list in the left-hand column
+THEN that note appears in the right-hand column
+WHEN I click on the Write icon in the navigation at the top of the page
+THEN I am presented with empty fields to enter a new note title and the note’s text in the right-hand column
+```
 ## Contributing
 If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement". Don't forget to give the project a star! Thanks again!
 
@@ -74,12 +96,12 @@ Distributed under the MIT License. See [LICENSE](./LICENSE) for more information
 
 For any further questions feel free to contact me via:
 - GitHub: [Oliver-Lopez](https://github.com/)
-- Email: [oliver.t.@gmail.com](mailto:mateo.t.wallace@gmail.com)
-- LinkedIn: [Mateo Wallace](https://www.linkedin.com/in/mateo-wallace-57931b254/)
+- Email: [oliveberto@gmail.com](mailto:oliverberto@gmail.com)
+- LinkedIn: [Oliver Lopez](https://www.linkedin.com/in/oliver-lopez78/)
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Acknowledgments
 
 Special thanks to these resources. You have proven invaluable to creating this project:
-- [List](#)
+- []()
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

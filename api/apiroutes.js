@@ -9,9 +9,8 @@
 
 // const express = require();
 
-// // Helper method for generating unique ids
+// Helper method for generating unique ids
  const uuid = require('../helpers/uuid');
-// const { Console } = require('console');
 
 const PORT = 3001;
 
@@ -20,6 +19,12 @@ apirouter.get('/notes', (req, res) => {
     // res.json sending data html file
     res.json(db)
 })
+
+
+
+ apirouter.delete('/notes/:id', (req, res) => {
+     res.send('Got a DELETE request at /notes')
+ })
 
 // POST request to add a note when a new note comes this route will append
 apirouter.post('/notes', (req, res) => {
@@ -34,7 +39,7 @@ apirouter.post('/notes', (req, res) => {
         const newNote = {
             title,
             text,
-            note_id: Math.floor((1 + Math.random())  *10000),
+            id: Math.floor((1 + Math.random())  *10000),
         };
         db.push(newNote);
 
