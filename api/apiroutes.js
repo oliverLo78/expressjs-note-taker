@@ -1,16 +1,16 @@
- const apirouter = require('express').Router();
- const app = require('express');
- const path = require('path');
- const fs = require('fs');
- const util = require('util');
+const apirouter = require('express').Router();
+const app = require('express');
+const path = require('path');
+const fs = require('fs');
+const util = require('util');
 
- // an array of objects stringify
- let db = require('../db/db.json');
+// an array of objects stringify
+let db = require('../db/db.json');
 
 // const express = require();
 
 // Helper method for generating unique ids
- const uuid = require('../helpers/uuid');
+const uuid = require('../helpers/uuid');
 
 const PORT = 3001;
 
@@ -18,13 +18,11 @@ apirouter.get('/notes', (req, res) => {
     db = JSON.parse(fs.readFileSync('./db/db.json'));
     // res.json sending data html file
     res.json(db)
-})
+});
 
-
-
- apirouter.delete('/notes/:id', (req, res) => {
-     res.send('Got a DELETE request at /notes')
- })
+ apirouter.get('/notes/:id', (req, res) => {
+     res.send('Got a individual note request at /notes')
+});
 
 // POST request to add a note when a new note comes this route will append
 apirouter.post('/notes', (req, res) => {
@@ -46,7 +44,7 @@ apirouter.post('/notes', (req, res) => {
         // readAndAppend(newNote, './db/db.json');
         res.json('Note added successfully 🚀');
         
-            // res.error('Error in adding note!');
+        // res.error('Error in adding note!');
         }
    
         // Write updated reviews back to the file the append part
@@ -61,6 +59,11 @@ apirouter.post('/notes', (req, res) => {
             res.json(db);
         });
 
-        module.exports = apirouter;
+// DELETE request to delete a note when a new note comes this route 
+apirouter.delete('/notes/:id', (req, res) => {
+    res.send('Got a delete note request at /notes')
+});
+
+module.exports = apirouter;
 
         
