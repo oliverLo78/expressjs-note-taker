@@ -155,29 +155,25 @@ const renderNoteList = async (notes) => {
   const createLi = (text, delBtn = true) => {
     const liEl = document.createElement('li');
     liEl.classList.add('list-group-item');
-
+  
     const spanEl = document.createElement('span');
     spanEl.classList.add('list-item-title');
     spanEl.textContent = text;
     spanEl.addEventListener('click', handleNoteView);
-
+  
     liEl.append(spanEl);
-
+  
     if (delBtn) {
       const delBtnEl = document.createElement('i');
-      delBtnEl.classList.add(
-        'fas',
-        'fa-trash-alt',
-        'float-right',
-        'text-danger',
-        'delete-note'
-      );
-      delBtnEl.setAttribute('aria-label', 'Delete Note');
+      delBtnEl.classList.add('fas', 'fa-trash-alt', 'float-right', 'text-danger', 'delete-note');
       delBtnEl.addEventListener('click', handleNoteDelete);
-
+  
       liEl.append(delBtnEl);
     }
-
+  
+    // Add the note data as a data attribute
+    liEl.dataset.note = JSON.stringify({ id: uuid(), title: text });
+  
     return liEl;
   };
 
