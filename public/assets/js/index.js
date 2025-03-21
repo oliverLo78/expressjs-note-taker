@@ -99,10 +99,26 @@ const handleNoteDelete = (e) => {
     activeNote = {};
   }
 
-  deleteNote(noteId).then(() => {
-    getAndRenderNotes();
-    renderActiveNote();
-  });
+  // Make the DELETE request to the server
+  fetch(`/api/notes/${noteId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Failed to delete note');
+      }
+      return response.json();
+    })
+    .then(() => {
+      getAndRenderNotes(); // Refresh the note list
+      renderActiveNote(); // Clear the active note display
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
 };
 
 // Sets the activeNote and displays it

@@ -56,8 +56,8 @@ apirouter.post('/notes', (req, res) => {
 
     // Create a new note
     const newNote = {
-      title,
-      text,
+      title: 'My new Note',
+      text: 'This is the content of my new note.',
       id: uuid(), // Generate a unique ID
     };
 
