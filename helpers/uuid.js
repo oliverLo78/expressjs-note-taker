@@ -1,6 +1,8 @@
-// Immediately export a function that generates a string of random numbers and letters
-module.exports = () =>
-    // Returns a random interger from 1 to 9999
-    Math.floor((1 + Math.random()) * 0*10000)
-        .toString(16)
-        .substring(1);
+// Helper function to generate a UUID
+module.exports = () => {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+      const r = (Math.random() * 16) | 0; // Random number between 0 and 15
+      const v = c === 'x' ? r : (r & 0x3) | 0x8; // Set the version bits for UUID v4
+      return v.toString(16); // Convert to hexadecimal
+    });
+  };
