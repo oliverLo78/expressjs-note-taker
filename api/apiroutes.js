@@ -1,69 +1,98 @@
 const apirouter = require('express').Router();
-const app = require('express');
-const path = require('path');
 const fs = require('fs');
-const util = require('util');
-
-// an array of objects stringify
-let db = require('../db/db.json');
-
-// const express = require();
-
-// Helper method for generating unique ids
+const path = require('path');
 const uuid = require('../helpers/uuid');
 
-const PORT = 3001;
+// Path to the db.json file
+const dbPath = path.join(__dirname, '../db/db.json');
 
+// Helper function to read the db.json file
+const readDb = () => {
+  const data = fs.readFileSync(dbPath, 'utf8');
+  return JSON.parse(data);
+};
+
+// Helper function to write to the db.json file
+const writeDb = (data) => {
+  fs.writeFileSync(dbPath, JSON.stringify(data, null, 2));
+};
+
+// GET /notes - Fetch all notes
 apirouter.get('/notes', (req, res) => {
-    db = JSON.parse(fs.readFileSync('./db/db.json'));
-    // res.json sending data html file
-    res.json(db)
+  try {
+    const db = readDb();
+    res.json(db);
+  } catch (err) {
+    console.error('Error reading db.json:', err);
+    res.status(500).json({ error: 'Failed to fetch notes' });
+  }
 });
 
- apirouter.get('/notes/:id', (req, res) => {
-     res.send('Got a individual note request at /notes')
+// GET /notes/:id - Fetch a single note by ID
+apirouter.get('/notes/:id', (req, res) => {
+  try {
+    const db = readDb();
+    const note = db.find((n) => n.id === req.params.id);
+    if (note) {
+      res.json(note);
+    } else {
+      res.status(404).json({ error: 'Note not found' });
+    }
+  } catch (err) {
+    console.error('Error fetching note:', err);
+    res.status(500).json({ error: 'Failed to fetch note' });
+  }
 });
 
-// POST request to add a note when a new note comes this route will append
+// POST /notes - Add a new note
 apirouter.post('/notes', (req, res) => {
-    // log that a POST request was received 
-    console.log(`${req.method} request received to add a note`);
-
-    // Destructuring assignment for the items in req.body
+  try {
     const { title, text } = req.body;
 
-    // If all the required properties are present
-    if (title && text) {
-        const newNote = {
-            title,
-            text,
-            id: Math.floor((1 + Math.random())  *10000),
-        };
-        db.push(newNote);
+    // Validate request body
+    if (!title || !text) {
+      return res.status(400).json({ error: 'Title and text are required' });
+    }
 
-        // readAndAppend(newNote, './db/db.json');
-        res.json('Note added successfully 🚀');
-        
-        // res.error('Error in adding note!');
-        }
-   
-        // Write updated reviews back to the file the append part
-        fs.writeFile(
-            './db/db.json',
-            JSON.stringify(db, null, 3),
-            (writeErr) =>
-                writeErr
-                ? console.error(err)
-                : console.log(`Successfully added the note!`)
-            );
-            res.json(db);
-        });
+    // Create a new note
+    const newNote = {
+      title,
+      text,
+      id: uuid(), // Generate a unique ID
+    };
 
-// DELETE request to delete a note when a new note comes this route 
+    // Add the new note to the db
+    const db = readDb();
+    db.push(newNote);
+    writeDb(db);
+
+    res.json({ message: 'Note added successfully 🚀', note: newNote });
+  } catch (err) {
+    console.error('Error adding note:', err);
+    res.status(500).json({ error: 'Failed to add note' });
+  }
+});
+
+// DELETE /notes/:id - Delete a note by ID
 apirouter.delete('/notes/:id', (req, res) => {
-    res.send('Got a delete note request at /notes')
+  try {
+    const db = readDb();
+    const noteIndex = db.findIndex((n) => n.id === req.params.id);
+
+    if (noteIndex === -1) {
+      return res.status(404).json({ error: 'Note not found' });
+    }
+
+    // Remove the note from the db
+    db.splice(noteIndex, 1);
+    writeDb(db);
+
+    res.json({ message: 'Note deleted successfully' });
+  } catch (err) {
+    console.error('Error deleting note:', err);
+    res.status(500).json({ error: 'Failed to delete note' });
+  }
 });
 
 module.exports = apirouter;
-
         

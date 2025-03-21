@@ -31,7 +31,14 @@ const getNotes = () =>
     headers: {
       'Content-Type': 'application/json',
     },
-  });
+  })
+    .then((response) => {
+      if (!response.ok) throw new Error('Failed to fetch notes');
+      return response;
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
 
 const saveNote = (note) =>
   fetch('/api/notes', {
@@ -67,6 +74,10 @@ const renderActiveNote = () => {
 };
 
 const handleNoteSave = () => {
+  if (!noteTitle.value.trim() || !noteText.value.trim()) {
+    alert('Note title and text cannot be empty.');
+    return;
+  }
   const newNote = {
     title: noteTitle.value,
     text: noteText.value,
@@ -79,7 +90,6 @@ const handleNoteSave = () => {
 
 // Delete the clicked note
 const handleNoteDelete = (e) => {
-  // Prevents the click listener for the list from being called when the button inside of it is clicked
   e.stopPropagation();
 
   const note = e.target;
@@ -132,7 +142,7 @@ const renderNoteList = async (notes) => {
 
     const spanEl = document.createElement('span');
     spanEl.classList.add('list-item-title');
-    spanEl.innerText = text;
+    spanEl.textContent = text;
     spanEl.addEventListener('click', handleNoteView);
 
     liEl.append(spanEl);
@@ -146,6 +156,7 @@ const renderNoteList = async (notes) => {
         'text-danger',
         'delete-note'
       );
+      delBtnEl.setAttribute('aria-label', 'Delete Note');
       delBtnEl.addEventListener('click', handleNoteDelete);
 
       liEl.append(delBtnEl);
@@ -171,7 +182,10 @@ const renderNoteList = async (notes) => {
 };
 
 // Gets notes from the db and renders them to the sidebar
-const getAndRenderNotes = () => getNotes().then(renderNoteList);
+const getAndRenderNotes = () => {
+  noteList.forEach((el) => (el.innerHTML = 'Loading...'));
+  getNotes().then(renderNoteList);
+};
 
 if (window.location.pathname === '/notes') {
   saveNoteBtn.addEventListener('click', handleNoteSave);
