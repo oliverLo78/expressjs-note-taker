@@ -16,14 +16,21 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="/assets/css/styles.css" />
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico" />
   </head>
 
   <body>
     <nav class="navbar navbar-dark bg-dark">
       <a class="navbar-brand" href="/">Note Taker </a>
       <div class="icons">
-        <i class="fas fa-save text-light save-note"></i>
-        <i class="fas fa-plus text-light new-note"></i>
+        <i
+          class="fas fa-save text-light save-note"
+          aria-label="Save Note"
+        ></i>
+        <i
+          class="fas fa-plus text-light new-note"
+          aria-label="New Note"
+        ></i>
       </div>
     </nav>
     <div class="container-fluid">
@@ -34,13 +41,20 @@
           </div>
         </div>
         <div class="col-8">
+          <label for="note-title" class="sr-only">Note Title</label>
           <input
+            id="note-title"
             class="note-title"
             placeholder="Note Title"
             maxlength="28"
             type="text"
           />
-          <textarea class="note-textarea" placeholder="Note Text"></textarea>
+          <label for="note-textarea" class="sr-only">Note Text</label>
+          <textarea
+            id="note-textarea"
+            class="note-textarea"
+            placeholder="Note Text"
+          ></textarea>
         </div>
       </div>
     </div>
