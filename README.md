@@ -1,11 +1,11 @@
-# expressjs-note-taker
+# Project Title: expressjs-note-taker
+
 This application is a note taker powered by expressjs back end and will save and retrieve note data from json file
 
 <p id="readme-top"></p>
 
 [![License Shield](https://img.shields.io/badge/License-MIT-success?style=for-the-badge)](./LICENSE)    [![LinkedIn Shield](https://img.shields.io/badge/LinkedIn-555555?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/oliver-lopez78/)
 
-# Project Title
 
 ## Description
 
